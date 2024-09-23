@@ -47,27 +47,11 @@
             }
         }
         function ExitGame(val, token) {
+          const message = { action: "close_app", value: "Close Gam" };
+          window.vuplex.postMessage(JSON.stringify(message));
             if (urlParams.has('lobby')) {
                 var lob = urlParams.get('lobby') + '/?' + urlParams.get('partner_id');
                 window.location.href = lob + '&token=' + token;
-            } else {
-                  window.location.href = "ayos://Exit?code=" + val;
-                window.close();
-                // if (isIOS()) {
-                //     try {
-                //         alert('[EXIT][IOS] Exiting with code: ' + val);
-                //         window.location.href = "ayos://Exit?code=" + val;
-                //     } catch (err) {
-                //         alert('[EXIT][IOS] Cannot exit: ' + err.message);
-                //     }
-                // } else if (isAndroid()) {
-                //     try {
-                //         alert('[EXIT][ANDROID] Exiting with code: ' + val);
-                //         sendMessageToUnity("Exit=" + val);
-                //     } catch (err) {
-                //         console.log('[EXIT][ANDROID] Cannot exit: ' + err.message);
-                //     }
-                // }
             }
             //ELSE exit unity webview
         }
