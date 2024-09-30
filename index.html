@@ -56,9 +56,14 @@
             //ELSE exit unity webview
         }
         function OpenMultiplayer(link, val, token, bgm, sfx) {
-           // window.location.href = link + '?auth=' + token + '&uuid=' + val + '&sett=' + bgm + '.' + sfx;
-          const message = { action: "open_game", value: link + '?auth=' + token + '&uuid=' + val + '&sett=' + bgm + '.' + sfx };
-          window.vuplex.postMessage(JSON.stringify(message));
+            const url = link + '?auth=' + token + '&uuid=' + val + '&sett=' + bgm + '.' + sfx;
+
+            if (isAndroid() || isIOS()) {
+                const message = { action: "open_game", value: url };
+                window.vuplex.postMessage(JSON.stringify(message));
+            } else {
+                window.location.href = url;
+            }
         }
 
 
